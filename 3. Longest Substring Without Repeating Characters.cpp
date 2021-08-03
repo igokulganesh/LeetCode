@@ -1,4 +1,31 @@
 /*
+	Sliding Window Technique
+	Time : O(n)
+	space : Constant
+*/
+int lengthOfLongestSubstring(string s) 
+{
+    vector<bool> hashTable(256, false); 
+
+    int maxLen = 0, start = 0, n = s.size() ; 
+
+    for(int i = 0 ; i < n ; i++)
+    {
+    	while( i != start and hashTable[s[i]])
+    	{
+    		hashTable[s[start++]] = 0 ; 
+    	}
+
+    	hashTable[s[i]] = true ;
+
+    	maxLen = max(maxLen, i-start+1);  
+    }
+
+    return maxLen ; 
+}
+
+
+/*
 	Dynamic Programming Approach 
 	bottom up approach which takes n*n 
 	Timelimit exceeds 
