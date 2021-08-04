@@ -1,3 +1,7 @@
+/* here I used DFS method to remove the visited island 
+   we can also use BFS (queue) to achieve same 
+*/
+
 int r, c ; 
 
 void numIslands(vector<vector<char>>& grid, int i, int j) // DFS 
