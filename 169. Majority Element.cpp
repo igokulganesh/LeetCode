@@ -20,3 +20,41 @@ int majorityElement(vector<int> & v)
     return major ; 
 }
 
+/*
+    Above Approach have Space Complexity O(n)
+    we have to optimize it
+
+sort and return the middle element
+Time: O(nLogn)
+space: O(1)
+
+*/ 
+
+int majorityElement(vector<int>& nums) 
+{
+    sort(nums.begin(), nums.end());
+    return nums[nums.size()/2];
+}
+
+
+/*
+    Best Solution using moor's voting Alg 
+*/
+int majorityElement(vector<int>& nums) 
+{
+    int count = 1 ;
+    int major = nums[0] ; 
+
+    for(int i = 1 ; i < nums.size() ; i++)
+    {
+        if(count == 0)
+            major = nums[i] ; 
+        
+        if(major == nums[i])
+            count++ ; 
+        else
+            count-- ; 
+    }
+
+    return major ; 
+}
