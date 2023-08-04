@@ -1,3 +1,7 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
 int hackerlandRadioTransmitters(vector<int> v, int k) 
 {
 	int i = 0, c = 0 ; 
@@ -333,3 +337,4 @@ int pylons(int k, vector<int> arr)
 
 	return c ; 
 }
+
