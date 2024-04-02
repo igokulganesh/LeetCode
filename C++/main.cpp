@@ -59,6 +59,7 @@ int trap(vector<int> &height)
 
     return result;
 }
+
 // 844. Backspace String Compare
 bool backspaceCompare(string s, string t)
 {
