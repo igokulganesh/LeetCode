@@ -1,11 +1,18 @@
-void deleteNode(ListNode* node) 
+#include <bits/stdc++.h>
+
+using namespace std;
+
+struct ListNode
 {
-    ListNode* del = node->next ; 
+    int val;
+    ListNode *next;
+    ListNode(int x) : val(x), next(NULL) {}
+};
 
-    node->val = del->val ; 
-    node->next = del->next ; 
-
-    delete del ; 
+void deleteNode(ListNode *node)
+{
+    node->val = node->next->val;
+    node->next = node->next->next;
 }
 
 // Think, We don't need to change the address we can change the value
