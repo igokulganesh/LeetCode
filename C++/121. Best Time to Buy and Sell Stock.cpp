@@ -1,12 +1,16 @@
-int maxProfit(vector<int>& prices) 
-{
-    int profit = 0, stock = prices[0] ; 
+#include <vector>
 
-    for(int i = 1 ; i < prices.size() ; i++)
+using namespace std;
+
+int maxProfit(vector<int> &prices)
+{
+    int buy = prices[0], max_profit = 0;
+
+    for (auto price : prices)
     {
-        profit = max(profit, prices[i]-stock);  
-        stock = min(stock, prices[i]); 
+        max_profit = max(max_profit, price - buy);
+        buy = min(buy, price);
     }
 
-    return profit ; 
+    return max_profit;
 }
