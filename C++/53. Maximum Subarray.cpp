@@ -1,14 +1,17 @@
-int maxSubArray(vector<int>& nums) 
+#include <vector>
+
+using namespace std;
+
+int maxSubArray(vector<int> &nums)
 {
-    int cursum = 0 , i = 0, maxSum = nums[0] ; 
-    
-    for(int x : nums )
+    int max_sum = nums[0], cur_sum;
+
+    for (auto num : nums)
     {
-        cursum += x ; 
-        maxSum = max(cursum, maxSum);
-        cursum = max(cursum, 0); 
+        cur_sum += num;
+        max_sum = max(max_sum, cur_sum);
+        cur_sum = max(cur_sum, 0);
     }
 
-    return maxSum ; 
+    return max_sum;
 }
-   
