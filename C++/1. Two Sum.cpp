@@ -1,61 +1,56 @@
-//Brutte Fore method 
-vector<int> twoSum(vector<int>& nums, int target) 
+#include <vector>
+#include <unordered_map>
+#include <algorithm>
+
+using namespace std;
+
+// Brutte Fore method
+vector<int> twoSum(vector<int> &nums, int target)
 {
-    vector<int> res , nums1 = nums ;
-
-    int n = nums.size() ;
-    int sum;
-
-    for(int i = 0 ; i < n ; i++)
+    for (int i = 0; i < nums.size(); i++)
     {
-        for(int j = i+1 ; j < n ; j++)
+        for (int j = i + 1; j < nums.size(); j++)
         {
-            sum = nums[i] + nums[j] ;
-            if(sum == target)
-            {
-                res.push_back(i) ; 
-                res.push_back(j) ;
-                break ;
-            }
+            if (nums[i] + nums[j] == target)
+                return {i, j};
         }
     }
-    return res ;
+    return {-1, -1};
 }
 
 // Using Extra space to optimize the time complexity
-vector<int> twoSum(vector<int>& nums, int target)
+vector<int> twoSum(vector<int> &nums, int target)
 {
-    unordered_map<int, int> m ; // key : number ; value : index 
+    unordered_map<int, int> m;
 
-    for(int i = 0 ; i < nums.size() ; i++)
-        m[nums[i]] = i ; 
+    for (int i = 0; i < nums.size(); i++)
+        m[nums[i]] = i;
 
-    for(int i = 0 ; i < nums.size() ; i++)
+    for (int i = 0; i < nums.size(); i++)
     {
-        if(m.find(target-nums[i]) != m.end() and m[target-nums[i]] != i )
-            return {i, m[target-nums[i]]} ; 
+        if (m.find(target - nums[i]) != m.end() and m[target - nums[i]] != i)
+            return {i, m[target - nums[i]]};
     }
-    return {0}; 
+    return {-1, -1};
 }
 
-
-// changing the given array leads to wrong answer
-vector<int> twoSum(vector<int>& nums, int target) 
+// If given array is sorted
+vector<int> twoSum(vector<int> &nums, int target)
 {
-    sort(nums.begin(), nums.end()); 
-    int i = 0, j = nums.size()-1, sum ; 
+    sort(nums.begin(), nums.end());
+    int l = 0, r = nums.size() - 1, sum;
 
-    while(1)
+    while (l < r)
     {
-        sum = nums[i] + nums[j] ; 
-        
-        if(sum == target)
-            return {i, j};
+        sum = nums[l] + nums[r];
 
-        if(sum > target)
-            j-- ;
+        if (sum == target)
+            break;
+
+        if (sum > target)
+            l--;
         else
-            i++ ; 
+            r++;
     }
-    return {0} ;
+    return {l, r};
 }
