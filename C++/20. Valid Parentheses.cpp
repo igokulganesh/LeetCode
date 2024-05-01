@@ -1,35 +1,39 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
 bool isOpen(char ch)
 {
-    return (ch == '[' or ch == '{' or ch == '(') ; 
+    return (ch == '[' or ch == '{' or ch == '(');
 }
 
 bool isMatch(char open, char close)
 {
-    switch(open)
+    switch (open)
     {
-        case '{' : 
-            return (close == '}') ; 
-        case '[' :
-            return (close == ']') ;
-        case '(' : 
-            return (close == ')') ; 
+    case '{':
+        return (close == '}');
+    case '[':
+        return (close == ']');
+    case '(':
+        return (close == ')');
     }
-    return false ;
+    return false;
 }
 
-bool isValid(string s) 
+bool isValid(string s)
 {
-    stack<char> st ; 
+    stack<char> st;
 
-    for(int i = 0 ; i < s.size(); i++)
-    { 
-        if(isOpen(s[i]))
-            st.push(s[i]); 
-        else if(!st.empty() and isMatch(st.top(), s[i]))
-            st.pop(); 
+    for (char c : s)
+    {
+        if (isOpen(c))
+            st.push(c);
+        else if (!st.empty() and isMatch(st.top(), c))
+            st.pop();
         else
-            return false ; 
-    }    
+            return false;
+    }
 
-    return st.empty(); 
+    return st.empty();
 }
