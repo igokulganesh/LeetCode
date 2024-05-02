@@ -1,32 +1,29 @@
+#include <string>
+
+using namespace std;
+
 /*
-    Two Pointers Technique 
+    Two Pointers Technique
     Time: O(n) linear
     Space: O(1) Constant
 */
-bool isPalindrome(string s) 
+bool isPalindrome(string s)
 {
-    int i = 0, j = s.size()-1; 
+    int left = 0, right = s.size() - 1;
 
-    while(i < j)
+    while (left < right)
     {
-        while( i < j and !iswalnum(s[i]))
-            i++ ; 
+        while (left < s.size() and iswalnum(s[left]) == 0)
+            left++;
 
-        if(i < j)
-            s[i] = tolower(s[i]); 
+        while (right >= 0 and iswalnum(s[right]) == 0)
+            right--;
 
-        while(i < j and !iswalnum(s[j]))
-            j-- ; 
+        if (left < right and tolower(s[left]) != tolower(s[right]))
+            return false;
 
-        if(i < j)
-            s[j] = tolower(s[j]);
+        left++, right--;
+    }
 
-        if(i < j and s[i] != s[j])
-            return false ; 
-
-        i++ ; 
-        j-- ;
-    }   
-
-    return true ;  
+    return true;
 }
