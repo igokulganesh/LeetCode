@@ -1,38 +1,46 @@
-#include <vector>
+#include <bits/stdc++.h>
 
 using namespace std;
 
-// Brutte Force Method
+/*
+Approach: Brute Force Method
+Time: O(n^2)
+Space: O(1)
+*/
 int maxArea(vector<int> &height)
 {
-	int res = 0;
+	int max_area = 0;
 
 	for (int i = 0; i < height.size(); i++)
 	{
 		for (int j = i + 1; j < height.size(); j++)
 		{
-			res = max(res, min(height[i], height[j]) * (j - i));
+			max_area = max(max_area, (j - i) * min(height[i], height[j]));
 		}
 	}
 
-	return res;
+	return max_area;
 }
 
-// Optimal Apporach
+/*
+Approach: Two Pointers
+Time: O(n)
+Space: O(1)
+*/
 int maxArea(vector<int> &height)
 {
-	int res = 0;
-	int low = 0, high = height.size() - 1;
+	int left = 0, right = height.size() - 1;
+	int max_area = 0;
 
-	while (low < high)
+	while (left < right)
 	{
-		res = max(res, (high - low) * min(height[low], height[high]));
+		max_area = max(max_area, (right - left) * min(height[left], height[right]));
 
-		if (height[low] < height[high])
-			low++;
+		if (height[left] < height[right])
+			left++;
 		else
-			high--;
+			right--;
 	}
 
-	return res;
+	return max_area;
 }
