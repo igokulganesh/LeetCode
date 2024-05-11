@@ -1,31 +1,33 @@
-string minRemoveToMakeValid(string s) 
+#include <bits/stdc++.h>
+
+using namespace std;
+
+string minRemoveToMakeValid(string s)
 {
-    stack<int> st ; 
-    vector<bool> remove(s.size(), false) ;  
-    for(int i = 0 ; i < s.size() ; i++)
+    stack<int> stack;
+    vector<bool> is_removed(s.size(), false);
+    string valid_str = "";
+
+    for (int i = 0; i < s.size(); i++)
     {
-        if(s[i] == '(')
-            st.push(i); 
-        else if(s[i] == ')')
-            if(st.empty())
-                remove[i] = true ; 
+        if (s[i] == '(')
+            stack.push(i);
+        else if (s[i] == ')')
+            if (stack.empty())
+                is_removed[i] = true;
             else
-                st.pop();
+                stack.pop();
     }
 
-    while(!st.empty())
+    while (!stack.empty())
     {
-        remove[st.top()] = true ;
-        st.pop();
+        is_removed[stack.top()] = true;
+        stack.pop();
     }
 
-    string res = "" ; 
+    for (int i = 0; i < s.size(); i++)
+        if (!is_removed[i])
+            valid_str += s[i];
 
-    for(int i = 0 ; i < s.size() ; i++)
-    {
-        if(remove[i] == false)
-            res += s[i] ; 
-    }
-    
-    return res ; 
+    return valid_str;
 }
