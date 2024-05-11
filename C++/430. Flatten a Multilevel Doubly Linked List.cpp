@@ -11,6 +11,7 @@ public:
     Node *child;
 };
 
+// Recursive Solution
 Node *flattenRec(Node *cur)
 {
     Node *prev = nullptr;
@@ -51,5 +52,29 @@ Node *flatten(Node *head)
 {
     if (head)
         flattenRec(head);
+    return head;
+}
+
+// Iterative Solution
+Node *flatten(Node *head)
+{
+    Node *next, *child;
+    for (Node *cur = head; cur; cur = cur->next)
+    {
+        if (cur->child)
+        {
+            next = cur->next;
+            cur->next = cur->child;
+            cur->next->prev = cur;
+            cur->child = nullptr;
+
+            child = cur->next;
+            while (child->next)
+                child = child->next;
+            child->next = next;
+            if (next)
+                next->prev = child;
+        }
+    }
     return head;
 }
