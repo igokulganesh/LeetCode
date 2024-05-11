@@ -1,51 +1,55 @@
-Node* flattenRec(Node* head) 
-{   
-    if(head == NULL)
-        return NULL ; 
+#include <bits/stdc++.h>
 
-    Node* cur = head ; 
-    Node* prev = head ;
-    Node* next = NULL; 
+using namespace std;
 
-    while(cur)
+class Node
+{
+public:
+    int val;
+    Node *prev;
+    Node *next;
+    Node *child;
+};
+
+Node *flattenRec(Node *cur)
+{
+    Node *prev = nullptr;
+    Node *next;
+
+    while (cur)
     {
-        next = cur->next ; 
-        if(cur->child)
+        if (cur->child)
         {
-            Node* next = cur->next ; // Storing next value 
+            next = cur->next; // Storing next value
 
-            cur->next = cur->child ; // make cur next as child 
+            cur->next = cur->child; // make cur next as child
 
-            cur->child->prev = cur ;  // make child prev as cur
+            cur->child->prev = cur; // make child prev as cur
 
-            Node* NewTail = flattenRec(cur->next); // recursive call for flattern child level and return tail of that list 
+            Node *NewTail = flattenRec(cur->child); // recursive call for flattern child level and return tail of that list
 
-            NewTail->next = next ; // make new list next to cur next 
+            NewTail->next = next; // make new list next to cur next
 
-            if(next)
-                next->prev = NewTail ; // make next prev as new list end 
+            if (next)
+                next->prev = NewTail; // make next prev as new list end
 
-            cur->child = nullptr ; 
+            cur->child = nullptr;
 
-            cur = next ; 
-            prev = NewTail ;
+            cur = next;
+            prev = NewTail;
         }
         else
         {
-            prev = cur ; 
-            cur = cur->next ; 
+            prev = cur;
+            cur = cur->next;
         }
     }
-
-    if(cur == NULL)
-        return prev ; 
-
-    return head ; 
+    return prev; // return current list tails
 }
 
-Node* flatten(Node* head)
+Node *flatten(Node *head)
 {
-    if(head)
+    if (head)
         flattenRec(head);
-    return head ; 
+    return head;
 }
