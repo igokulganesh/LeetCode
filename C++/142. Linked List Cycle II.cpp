@@ -1,22 +1,35 @@
-ListNode *detectCycle(ListNode *head) 
+#include <bits/stdc++.h>
+
+using namespace std;
+
+struct ListNode
 {
-    ListNode* slow = head, *fast = head ; 
+    int val;
+    ListNode *next;
+    ListNode() : val(0), next(nullptr) {}
+    ListNode(int x) : val(x), next(nullptr) {}
+    ListNode(int x, ListNode *next) : val(x), next(next) {}
+};
 
-    while(fast and fast->next)
+ListNode *detectCycle(ListNode *head)
+{
+    ListNode *slow = head, *fast = head;
+
+    while (fast and fast->next)
     {
-        slow = slow->next ; 
-        fast = fast->next->next ; 
+        slow = slow->next;
+        fast = fast->next->next;
 
-        if(slow == fast)
+        if (slow == fast)
         {
-            ListNode* start = head ;
-            while(slow != start)
+            slow = head;
+            while (slow != fast)
             {
-                slow = slow->next ;
-                start = start->next ; 
+                slow = slow->next;
+                fast = fast->next;
             }
-            return start ; 
+            return slow;
         }
-    }   
-    return NULL ;  
+    }
+    return nullptr;
 }
