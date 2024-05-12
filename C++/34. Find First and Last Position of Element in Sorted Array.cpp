@@ -1,50 +1,49 @@
-int findStart(vector<int> & nums, int target)
+#include <vector>
+
+using namespace std;
+
+int findStart(vector<int> &nums, int target)
 {
-    int low = 0, high = nums.size()-1, mid ;
-    int res = -1 ; 
+    int low = 0, high = nums.size() - 1, mid;
+    int res = -1;
 
-    while(low <= high)
+    while (low <= high)
     {
-        mid = low + (high-low)/2 ; 
+        mid = low + (high - low) / 2;
 
-        if(nums[mid] >= target)
-            high = mid-1 ; 
+        if (nums[mid] >= target)
+            high = mid - 1;
         else
-            low = mid+1 ; 
+            low = mid + 1;
 
-        if(nums[mid]  == target)
-            res = mid ; 
+        if (nums[mid] == target)
+            res = mid;
     }
-    return res ; 
+    return res;
 }
 
-int findEnd(vector<int> & nums, int target)
+int findEnd(vector<int> &nums, int target)
 {
-    int low = 0, high = nums.size()-1, mid ;
-    int res = -1 ; 
+    int low = 0, high = nums.size() - 1, mid;
+    int res = -1;
 
-    while(low <= high)
+    while (low <= high)
     {
-        mid = low + (high-low)/2 ; 
+        mid = low + (high - low) / 2;
 
-        if(nums[mid] <= target)
-            low = mid+1 ; 
+        if (nums[mid] <= target)
+            low = mid + 1;
         else
-            high = mid-1 ; 
+            high = mid - 1;
 
-        if(nums[mid]  == target)
-            res = mid ; 
+        if (nums[mid] == target)
+            res = mid;
     }
 
-    return res ; 
+    return res;
 }
 
-vector<int> searchRange(vector<int>& nums, int target) 
+vector<int> searchRange(vector<int> &nums, int target)
 {
-    vector<int> res(2); 
-
-    res[0] = findStart(nums, target);
-    res[1] = findEnd(nums, target); 
-
-    return res ;   
+    return {findStart(nums, target), findEnd(nums, target)};
 }
