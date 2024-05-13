@@ -1,37 +1,49 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+struct TreeNode
+{
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode() : val(0), left(nullptr), right(nullptr) {}
+    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+    TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+};
+
 /*
     Here we use Level Order Traversal
-    in each level pickup the last element 
+    in each level pickup the last element
 */
-vector<int> rightSideView(TreeNode* root)
+vector<int> rightSideView(TreeNode *root)
 {
-    if(root == nullptr)
-        return {} ; 
+    vector<int> res;
 
-    vector<int> res ; 
-    
-    queue<TreeNode*> q ; 
-    q.push(root) ;
-    
-    TreeNode *temp ; 
-    
-    while(!q.empty())
+    queue<TreeNode *> que;
+    int level;
+
+    if (root)
+        que.push(root);
+
+    while (!que.empty())
     {
-        int len = q.size();
+        level = que.size();
 
-        while(len--)
+        while (level--)
         {
-            temp = q.front(); 
-            q.pop(); 
-            
-            if(len == 0)
-                res.push_back(temp->val); 
+            root = que.front();
+            que.pop();
 
-            if(temp->left)
-                q.push(temp->left);
+            if (level == 0)
+                res.push_back(root->val);
 
-            if(temp->right)
-                q.push(temp->right);
-        } 
+            if (root->left)
+                que.push(root->left);
+
+            if (root->right)
+                que.push(root->right);
+        }
     }
-    return res ; 
+    return res;
 }
