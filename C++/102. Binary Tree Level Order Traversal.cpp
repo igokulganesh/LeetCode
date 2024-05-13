@@ -1,36 +1,49 @@
-vector<vector<int>> levelOrder(TreeNode* root) 
+#include <bits/stdc++.h>
+
+using namespace std;
+
+struct TreeNode
 {
-    vector<vector<int>> res ; 
-    vector<int> sub ; 
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode() : val(0), left(nullptr), right(nullptr) {}
+    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+    TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+};
 
-    if(root == NULL)
-        return res ; 
+vector<vector<int>> levelOrder(TreeNode *root)
+{
+    vector<vector<int>> result;
 
-    queue<TreeNode*> q ; 
-    q.push(root);
+    vector<int> level;
+    int level_len;
 
-    TreeNode *temp ; 
-    int level ; 
+    queue<TreeNode *> que;
 
-    while(!q.empty())
+    if (root)
+        que.push(root);
+
+    while (!que.empty())
     {
-        sub.clear();
-        level = q.size() ;
-        while(level--)
+        level_len = que.size();
+
+        while (level_len--)
         {
-            temp = q.front();
-            q.pop(); 
-            sub.push_back(temp->val);
+            root = que.front();
+            que.pop();
 
-            if(temp->left)
-                q.push(temp->left);
+            level.push_back(root->val);
 
-            if(temp->right)
-                q.push(temp->right);
+            if (root->left)
+                que.push(root->left);
+
+            if (root->right)
+                que.push(root->right);
         }
+        result.push_back(level);
+        level.clear();
+    }
 
-        res.push_back(sub); 
-    }    
-
-    return res ; 
+    return result;
 }
