@@ -1,40 +1,45 @@
-/* here I used DFS method to remove the visited island 
-   we can also use BFS (queue) to achieve same 
+#include <bits/stdc++.h>
+
+using namespace std;
+
+/*
+	DFS method to remove the visited island
+	we can also use BFS (queue) to achieve same
 */
 
-int r, c ; 
+int row, col;
 
-void numIslands(vector<vector<char>>& grid, int i, int j) // DFS 
+void numIslands(vector<vector<char>> &grid, int i, int j) // DFS
 {
-	if(i == r or j == c or i < 0 or j < 0 or grid[i][j] == '0')
-		return ; 
+	if (i == row or j == col or i < 0 or j < 0 or grid[i][j] == '0')
+		return;
 
-	grid[i][j] = '0' ;
+	grid[i][j] = '0';
 
-	numIslands(grid, i+1, j) ; 
-	numIslands(grid, i-1, j) ;
-	numIslands(grid, i, j+1) ;
-	numIslands(grid, i, j-1) ;  
+	numIslands(grid, i + 1, j);
+	numIslands(grid, i - 1, j);
+	numIslands(grid, i, j + 1);
+	numIslands(grid, i, j - 1);
 }
 
-int numIslands(vector<vector<char>>& grid) 
+int numIslands(vector<vector<char>> &grid)
 {
-	r = grid.size() ; 
-	c = grid[0].size() ; 
+	row = grid.size();
+	col = grid[0].size();
 
-	int res = 0 ; 
+	int num_islands = 0;
 
-	for(int i = 0 ; i < r ; i++)
+	for (int i = 0; i < row; i++)
 	{
-		for(int j = 0 ; j < c ; j++)
+		for (int j = 0; j < col; j++)
 		{
-			if(grid[i][j] == '1')
+			if (grid[i][j] == '1')
 			{
-				numIslands(grid, i, j); 
-				res++ ; 
+				numIslands(grid, i, j);
+				num_islands++;
 			}
 		}
 	}
 
-	return res ; 
-}	
+	return num_islands;
+}
