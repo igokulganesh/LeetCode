@@ -1,40 +1,46 @@
-bool canFinish(int numCourses, vector<vector<int>>& prerequisites) 
+#include <bits/stdc++.h>
+
+using namespace std;
+
+bool canFinish(int numCourses, vector<vector<int>> &prerequisites)
 {
-    vector<int> incoming(numCourses, 0); 
-    vector<list<int>> graph(numCourses, list<int>()) ; 
+    vector<vector<int>> graph(numCourses, vector<int>()); // Adjacency List
+    vector<int> remaining(numCourses, 0);
 
-    for(int i = 0 ; i < prerequisites.size() ; i++)
+    for (int i = 0; i < prerequisites.size(); i++)
     {
-        graph[prerequisites[i][1]].push_back(prerequisites[i][0]); 
-        incoming[prerequisites[i][0]]++ ; 
-    }       
-
-    queue<int> q; 
-    for(int i = 0 ; i < numCourses ; i++)
-    {
-        if(incoming[i]==0)
-            q.push(i); 
+        graph[prerequisites[i][1]].push_back(prerequisites[i][0]);
+        remaining[prerequisites[i][0]]++;
     }
 
-    int u ; 
-    while(!q.empty())
-    {
-        u = q.front();
-        q.pop(); 
+    queue<int> que;
 
-        for(int x : graph[u])
+    for (int i = 0; i < numCourses; i++)
+    {
+        if (remaining[i] == 0)
+            que.push(i);
+    }
+
+    int course;
+
+    while (!que.empty())
+    {
+        course = que.front();
+        que.pop();
+
+        for (int higher_course : graph[course])
         {
-            incoming[x]-- ; 
-            if(incoming[x] == 0)
-                q.push(x);
+            remaining[higher_course]--;
+            if (remaining[higher_course] == 0)
+                que.push(higher_course);
         }
     }
 
-    for(int i = 0 ; i < numCourses ; i++)
+    for (int i = 0; i < numCourses; i++)
     {
-        if(incoming[i])
-            return false ; 
+        if (remaining[i])
+            return false;
     }
 
-    return true ; 
+    return true;
 }
