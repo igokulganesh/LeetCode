@@ -1,77 +1,72 @@
-struct Node
-{
-    vector<Node*> m ; 
-    bool isEnd ; 
+#include <bits/stdc++.h>
 
-    Node()
+using namespace std;
+
+struct TrieNode
+{
+    vector<TrieNode *> map;
+    bool is_end;
+
+    TrieNode()
     {
-        m = vector<Node*>(26, nullptr); 
-        isEnd = false ; 
+        map = vector<TrieNode *>(26, nullptr);
+        is_end = false;
     }
 };
 
-
-class Trie {
-
-    Node* root ; 
+class Trie
+{
+    TrieNode *root;
 
 public:
-    /** Initialize your data structure here. */
-    Trie() {
-        root = new Node(); 
+    Trie()
+    {
+        root = new TrieNode();
     }
-    
+
     /** Inserts a word into the trie. */
-    void insert(string word) 
+    void insert(string word)
     {
-        Node *cur = root ; 
-
-        for(int i = 0 ; i < word.size() ; i++)
+        TrieNode *cur = root;
+        for (char character : word)
         {
-            // check character present or not 
-            if(cur->m[word[i]-'a'] == nullptr)
-                cur->m[word[i]-'a'] = new Node(); 
-
-            cur = cur->m[word[i]-'a'] ; // Move to next character ;  
+            character -= 'a';
+            if (cur->map[character] == nullptr)
+                cur->map[character] = new TrieNode();
+            cur = cur->map[character]; // Move to next character
         }
-        cur->isEnd = true ;   
+        cur->is_end = true;
     }
-    
+
     /** Returns if the word is in the trie. */
-    bool search(string word) 
+    bool search(string word)
     {
-        Node *cur = root ; 
+        TrieNode *cur = root;
 
-        for(int i = 0 ; i < word.size() ; i++)
+        for (char character : word)
         {
-            if(cur->m[word[i]-'a'] == nullptr)
-                return false ; 
-            cur = cur->m[word[i]-'a'] ; 
-        }   
+            character -= 'a';
+            if (cur->map[character] == nullptr)
+                return false;
+            cur = cur->map[character];
+        }
 
-        return cur->isEnd ;  
+        return cur->is_end;
     }
-    
+
     /** Returns if there is any word in the trie that starts with the given prefix. */
-    bool startsWith(string word) 
+    bool startsWith(string prefix)
     {
-        Node *cur = root ; 
+        TrieNode *cur = root;
 
-        for(int i = 0 ; i < word.size() ; i++)
+        for (char character : prefix)
         {
-            if(cur->m[word[i]-'a'] == nullptr)
-                return false ; 
-            cur = cur->m[word[i]-'a'] ; 
-        }   
+            character -= 'a';
+            if (cur->map[character] == nullptr)
+                return false;
+            cur = cur->map[character];
+        }
 
-        return true ;   
+        return true;
     }
 };
-
-/**
- * Your Trie object will be instantiated and called as such:
- * Trie* obj = new Trie();
- * obj->insert(word);
- * bool param_2 = obj->search(word);
- * bool param_3 = obj->startsWith(prefix);
- */
