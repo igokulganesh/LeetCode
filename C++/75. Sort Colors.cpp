@@ -1,38 +1,43 @@
-// 2-pass 
-void sortColors(vector<int>& nums) 
+#include <bits/stdc++.h>
+
+using namespace std;
+
+// Binary Search Method
+void sortColors(vector<int> &nums)
 {
-    int w = 0, b = 0, n = nums.size() ;
+    int cur = 0, left = 0, right = nums.size() - 1;
 
-    for(int x : nums)
+    while (cur <= right)
     {
-        if(x == 0)
-            w++ ; 
-        else if(x == 1) 
-            b++ ;
-    } 
-
-    int i = 0 ; 
-    while(i < w)
-        nums[i++] = 0 ; 
-
-    while(i < b)
-        nums[i++] = 1 ; 
-
-    while(i < n)
-        nums[i++] = 2 ;  
+        if (nums[cur] == 0)
+            swap(nums[cur++], nums[left++]);
+        else if (nums[cur] == 2)
+            swap(nums[cur], nums[right--]);
+        else
+            cur++;
+    }
 }
 
-// single pass with Binary search 
-void sortColors(vector<int>& nums)
+// 2-pass
+void sortColors(vector<int> &nums)
 {
-    int low = 0, high = nums.size()-1, mid = 0; 
-    while(mid <= high)
+    int white = 0, blue = 0, n = nums.size();
+
+    for (int x : nums)
     {
-        if(nums[mid] == 0)
-            swap(nums[mid++], nums[low++]); 
-        else if(nums[mid] == 2)
-            swap(nums[mid], nums[high--]); 
-        else
-            mid++ ;
+        if (x == 0)
+            white++;
+        else if (x == 1)
+            blue++;
     }
+
+    int i = 0;
+    while (i < white)
+        nums[i++] = 0;
+
+    while (i < blue)
+        nums[i++] = 1;
+
+    while (i < n)
+        nums[i++] = 2;
 }
