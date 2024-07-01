@@ -21,15 +21,15 @@ vector<int> twoSum(vector<int> &nums, int target)
 // Using Extra space to optimize the time complexity
 vector<int> twoSum(vector<int> &nums, int target)
 {
-    unordered_map<int, int> m;
-
-    for (int i = 0; i < nums.size(); i++)
-        m[nums[i]] = i;
+    unordered_map<int, int> map;
 
     for (int i = 0; i < nums.size(); i++)
     {
-        if (m.find(target - nums[i]) != m.end() and m[target - nums[i]] != i)
-            return {i, m[target - nums[i]]};
+        if (map.find(target - nums[i]) != map.end() and map[target - nums[i]] != i)
+        {
+            return {i, map[target - nums[i]]};
+        }
+        map[nums[i]] = i;
     }
     return {-1, -1};
 }
