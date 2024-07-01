@@ -1,60 +1,61 @@
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
+#include <bits/stdc++.h>
 
-ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) 
+using namespace std;
+
+struct ListNode
 {
-	ListNode *head = nullptr, *cur ; 
-	int carry = 0, sum ; 
+	int val;
+	ListNode *next;
+	ListNode() : val(0), next(nullptr) {}
+	ListNode(int x) : val(x), next(nullptr) {}
+	ListNode(int x, ListNode *next) : val(x), next(next) {}
+};
 
-	while(l1 and l2)
+ListNode *addTwoNumbers(ListNode *l1, ListNode *l2)
+{
+	ListNode *head = nullptr, *cur;
+	int carry = 0, sum;
+
+	while (l1 and l2)
 	{
-		sum = l1->val + l2->val + carry ;
+		sum = l1->val + l2->val + carry;
 
-		if(!head)
+		if (!head)
 		{
-			head = new ListNode(sum%10); 
-			cur = head ; 
+			head = new ListNode(sum % 10);
+			cur = head;
 		}
 		else
 		{
-			cur->next = new ListNode(sum%10);
-			cur = cur->next ; 
+			cur->next = new ListNode(sum % 10);
+			cur = cur->next;
 		}
 
-		carry = sum/10 ; 
-		l1 = l1->next ; 
-		l2 = l2->next ; 
+		carry = sum / 10;
+		l1 = l1->next;
+		l2 = l2->next;
 	}
 
-	while(l1)
+	while (l1)
 	{
-		sum = l1->val + carry ;
-		cur->next = new ListNode(sum%10);
-		cur = cur->next ; 
-		carry = sum/10 ;
-		l1 = l1->next ; 
+		sum = l1->val + carry;
+		cur->next = new ListNode(sum % 10);
+		cur = cur->next;
+		carry = sum / 10;
+		l1 = l1->next;
 	}
 
-
-	while(l2)
+	while (l2)
 	{
-		sum = l2->val + carry ;
-		cur->next = new ListNode(sum%10);
-		cur = cur->next ; 
-		carry = sum/10 ;
-		l2 = l2->next ; 
+		sum = l2->val + carry;
+		cur->next = new ListNode(sum % 10);
+		cur = cur->next;
+		carry = sum / 10;
+		l2 = l2->next;
 	}
 
-	if(carry)
-		cur->next = new ListNode(carry);		
+	if (carry)
+		cur->next = new ListNode(carry);
 
-	return head ; 
+	return head;
 }
