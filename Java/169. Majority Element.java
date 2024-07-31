@@ -5,22 +5,20 @@ import java.util.HashMap;
  * Time: O(nlogn)
  * space: O(1)
  */
-class SortingSolution {
+class Solution {
 
-    public int majorityElement(int[] nums) {
+    public int majorityElement_1(int[] nums) {
         Arrays.sort(nums);
         return nums[nums.length / 2];
     }
-}
 
-/*
- * HashMap Solution
- * Time: O(n)
- * space: O(n)
- */
-class HashMapSolution {
+    /*
+     * HashMap Solution
+     * Time: O(n)
+     * space: O(n)
+     */
 
-    public int majorityElement(int[] nums) {
+    public int majorityElement_2(int[] nums) {
 
         var map = new HashMap<Integer, Integer>();
         int major = 0;
@@ -37,18 +35,15 @@ class HashMapSolution {
 
         return major;
     }
-}
 
-/*
- * Optimized Approach
- * moor's voting Alg
- * 
- * Time: O(n)
- * space: O(1)
- */
-class CountSolution {
-
-    public int majorityElement(int[] nums) {
+    /*
+     * Optimized Approach
+     * moor's voting Alg
+     * 
+     * Time: O(n)
+     * space: O(1)
+     */
+    public int majorityElement_3(int[] nums) {
         int count = 0;
         int major = 0;
 
