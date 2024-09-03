@@ -1,9 +1,9 @@
-// Brute-Force Solution
 
 import java.util.HashMap;
 
-class BruteForceSolution {
-    public int[] twoSum(int[] nums, int target) {
+class Solution {
+    // Brute-Force Solution
+    public int[] BruteForceSolution(int[] nums, int target) {
         for (int i = 0; i < nums.length; i++) {
             for (int j = i + 1; j < nums.length; j++) {
                 if (nums[i] + nums[j] == target)
@@ -12,9 +12,7 @@ class BruteForceSolution {
         }
         return null;
     }
-}
 
-class HashMapSolution {
     public int[] twoSum(int[] nums, int target) {
         var map = new HashMap<Integer, Integer>();
 
