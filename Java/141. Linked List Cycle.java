@@ -1,8 +1,4 @@
 class Solution {
-    class ListNode {
-        ListNode next;
-    }
-
     public boolean hasCycle(ListNode head) {
         ListNode slow = head, fast = head;
         while (fast != null && fast.next != null) {
@@ -13,5 +9,10 @@ class Solution {
                 return true;
         }
         return false;
+    }
+
+    /* ignore boiler code */
+    class ListNode {
+        ListNode next;
     }
 }
